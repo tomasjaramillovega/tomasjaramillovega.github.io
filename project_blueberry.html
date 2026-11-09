@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueberry Case Study — Tomas Jaramillo</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#08080a',
+                            card: '#121218',
+                            accent: '#3b82f6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans overflow-x-hidden selection:bg-brand-accent selection:text-white">
+
+    <canvas id="fluid-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-20"></canvas>
+    <div id="cursor-dot" class="fixed w-4 h-4 bg-white rounded-full pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 mix-blend-difference transition-transform duration-100"></div>
+
+    <header class="relative z-30 max-w-7xl mx-auto px-6 py-6 flex justify-between items-center border-b border-zinc-900/80">
+        <a href="index.html" class="font-display font-black text-2xl tracking-tighter hover:text-brand-accent transition-colors">TJ<span class="text-brand-accent">.</span></a>
+        <a href="index.html#featured-projects" class="magnetic-btn relative px-6 py-2.5 rounded-full border border-zinc-700 text-xs font-sans font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+            ← Back to Portfolio
+        </a>
+    </header>
+
+    <main class="relative z-20 w-full pb-32">
+        <section class="relative max-w-7xl mx-auto px-6 pt-40 pb-16 z-20 border-b border-zinc-900">
+            <div class="max-w-4xl space-y-6">
+                <div class="flex gap-3 flex-wrap">
+                    <span class="inline-block px-3 py-1 rounded-md bg-zinc-900/80 border border-brand-accent/30 text-xs font-sans font-bold uppercase tracking-widest text-brand-accent">
+                        BRAND DEVELOPMENT
+                    </span>
+                    <span class="inline-block px-3 py-1 rounded-md bg-zinc-900/80 border border-zinc-700 text-xs font-sans font-bold uppercase tracking-widest text-zinc-400">
+                        ONGOING
+                    </span>
+                </div>
+                <h1 class="font-display font-black text-6xl md:text-8xl tracking-tighter leading-none text-white uppercase">
+                    BLUEBERRY
+                </h1>
+                <p class="text-zinc-400 text-lg md:text-2xl font-light leading-relaxed mt-4">
+                    Brand Development & Visual Communication
+                </p>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-20">
+            <div class="lg:col-span-4 space-y-12">
+                <div class="bg-zinc-900/40 p-8 rounded-2xl border border-zinc-800">
+                    <h3 class="font-sans font-bold text-xs text-zinc-500 uppercase tracking-widest mb-6 pb-4 border-b border-zinc-800">PROJECT SCOPE</h3>
+                    <div class="space-y-6 text-sm font-sans text-zinc-200">
+                        <div>
+                            <span class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1">ROLE</span>
+                            <span>Brand Development & Visual Communication</span>
+                        </div>
+                        <div>
+                            <span class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1">SCALE</span>
+                            <span class="leading-relaxed text-zinc-400">Desarrollo de una marca independiente de productos de consumo, con énfasis en la identidad del producto y la comunicación digital.</span>
+                        </div>
+                        <div>
+                            <span class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1">IMPACT</span>
+                            <span class="leading-relaxed text-zinc-400">Desarrollo de una dirección creativa orientada a expresar la personalidad de la marca y construir una presencia visual coherente.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-8 font-sans">
+                <h2 class="font-display font-bold text-3xl md:text-4xl text-white mb-6 tracking-tighter uppercase">BUILDING A DISTINCTIVE IDENTITY</h2>
+                <div class="space-y-6 text-zinc-400 text-lg leading-relaxed">
+                    <p>
+                        Blueberry explora cómo una dirección creativa clara puede definir la forma en que una marca se presenta y conecta con su audiencia. El proyecto se centra en desarrollar un lenguaje visual y un estilo de comunicación coherentes con su personalidad, creando una experiencia reconocible en los diferentes puntos de contacto.
+                    </p>
+                    <p>
+                        Al conectar las decisiones visuales con el concepto central de la marca, el proyecto destaca la importancia de la consistencia y el pensamiento creativo en la construcción de una identidad diferenciada. La intención es que cada elemento de comunicación contribuya a expresar una personalidad propia y reconocible.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deliverables -->
+        <section class="max-w-7xl mx-auto px-6 py-12 relative z-20">
+            <h3 class="font-sans font-bold text-xs text-brand-accent uppercase tracking-widest mb-8">DELIVERABLES & ASSETS</h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Unclickable Brandbook PDF Placeholder -->
+                <div class="relative aspect-[16/10] bg-zinc-900/50 border border-zinc-800/60 rounded-2xl overflow-hidden cursor-not-allowed opacity-60">
+                    <img src="blueberry1.PNG" alt="Brandbook Blueberry" class="absolute inset-0 w-full h-full object-cover z-0">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-zinc-900/90 z-10">
+                        <span class="text-zinc-700 font-display font-black text-4xl uppercase tracking-tighter mb-2">[PDF]</span>
+                        <h4 class="font-display font-bold text-2xl text-zinc-400 uppercase tracking-tighter">
+                            Brandbook Blueberry
+                        </h4>
+                        <span class="px-3 py-1 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-400 font-sans font-bold text-[10px] uppercase tracking-widest mt-4">Próximamente / In Progress</span>
+                    </div>
+                </div>
+
+                <!-- Instagram Link -->
+                <a href="https://www.instagram.com/blueberry.col" target="_blank" class="group relative aspect-[16/10] bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden block hover:border-brand-accent/50 transition-all duration-300">
+                    <img src="blueberry2.JPEG" alt="Instagram Profile" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 z-0">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-zinc-900/80 group-hover:bg-zinc-900/60 transition-colors z-10">
+                        <span class="text-zinc-600 font-display font-black text-4xl uppercase tracking-tighter mb-2 group-hover:text-brand-accent transition-colors">[SOCIAL]</span>
+                        <h4 class="font-display font-bold text-2xl text-white uppercase tracking-tighter flex items-center gap-2">
+                            Instagram Profile <span class="text-brand-accent">↗</span>
+                        </h4>
+                        <span class="font-sans font-bold text-zinc-400 text-xs uppercase tracking-widest mt-2">@blueberry.col</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lenis = new Lenis({ duration: 1.2, smooth: true });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+        });
+    </script>
+</body>
+</html>

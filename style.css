@@ -1,0 +1,166 @@
+/* Core Lenis Smooth Scroll Baseline */
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
+
+body {
+    background-color: #08080a;
+    color: #f4f4f5;
+    cursor: default;
+}
+
+/* Custom Cursor & Spotlight Overlay */
+#cursor-spotlight {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* Ticker Animation */
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+    display: inline-flex;
+    animation: ticker 25s linear infinite;
+}
+
+.animate-ticker:hover {
+    animation-play-state: paused;
+}
+
+@keyframes ticker-fast {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Considerably slowed down background ticker text per your request */
+.animate-ticker-fast {
+    display: inline-flex;
+    animation: ticker-fast 45s linear infinite;
+}
+
+/* Slow Custom Float for Scanner Icon */
+@keyframes float-slow {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(15px, -15px); }
+    66% { transform: translate(-15px, 15px); }
+}
+
+.animate-float {
+    animation: float-slow 5s ease-in-out infinite;
+}
+
+/* Slow Spin */
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+}
+
+/* 3D Perspective Container */
+.perspective-container {
+    perspective: 1200px;
+}
+
+.preserve-3d {
+    transform-style: preserve-3d;
+}
+
+/* Card Glare Effect */
+.glare-overlay {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 60%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #08080a;
+}
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+}
+
+/* CSS Clip-Path Masking */
+.clip-card-custom {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
+}
+
+.clip-card-diagonal {
+    clip-path: polygon(0 40px, 100% 0, 100% calc(100% - 40px), 0 100%);
+}
+
+.clip-card-diagonal-alt {
+    clip-path: polygon(0 0, 100% 40px, 100% 100%, 0 calc(100% - 40px));
+}
+
+/* Staggered Text Reveal Formatting */
+.split-line {
+    overflow: hidden;
+    display: block;
+    padding-bottom: 0.1em;
+}
+.split-word {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+}
+
+/* Word-by-word text reveal */
+.word-wrap {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.1em;
+}
+
+.word-inner {
+    display: inline-block;
+    will-change: transform, color;
+}
+
+/* Ripplix-Style Micro-Interactions */
+.ripplix-link, .ripplix-btn {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.ripplix-text {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.ripplix-link::after, .ripplix-btn::after {
+    content: attr(data-hover);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    color: #3b82f6; /* Electric Blue */
+    transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.ripplix-btn::after {
+    color: #000;
+}
+
+.ripplix-link:hover .ripplix-text,
+.ripplix-btn:hover .ripplix-text {
+    transform: translateY(-100%);
+}
+
+.ripplix-link:hover::after,
+.ripplix-btn:hover::after {
+    transform: translateY(-100%);
+}

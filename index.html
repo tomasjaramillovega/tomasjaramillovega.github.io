@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomas Jaramillo — Marketing & Publicity Platform</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://unpkg.com/tailwindcss-cdn@3.4.1/tailwindcss.js" crossorigin="anonymous"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#08080a',
+                            card: '#121218',
+                            accent: '#3b82f6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lenis Smooth Scrolling Engine -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans overflow-x-hidden selection:bg-brand-accent selection:text-white">
+
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[200] bg-brand-dark flex flex-col items-center justify-center">
+        <div class="overflow-hidden pr-4">
+            <h1 class="text-4xl md:text-6xl font-display font-black uppercase tracking-tighter text-white preloader-text translate-y-[100%]">TJ<span class="text-brand-accent">.</span></h1>
+        </div>
+        <div class="w-48 h-[1px] bg-zinc-800 mt-8 relative overflow-hidden">
+            <div id="preloader-bar" class="absolute top-0 left-0 h-full bg-brand-accent w-0"></div>
+        </div>
+    </div>
+
+    <!-- Interactive Canvas & Custom Cursors -->
+    <canvas id="fluid-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-80"></canvas>
+    <div id="cursor-spotlight" class="fixed w-72 h-72 rounded-full pointer-events-none z-10 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 opacity-0 md:opacity-100"></div>
+    <div id="cursor-dot" class="fixed w-4 h-4 bg-white rounded-full pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 mix-blend-difference transition-transform duration-100"></div>
+
+    <!-- Floating Design Factors -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" id="parallax-bg">
+        <div class="floating-el absolute top-[20%] left-[10%] text-zinc-800 opacity-50 font-sans text-4xl" data-speed="0.04">+</div>
+        <div class="floating-el absolute top-[70%] left-[5%] text-zinc-800 opacity-30 font-sans text-2xl" data-speed="-0.06">O</div>
+        <div class="floating-el absolute top-[80%] right-[10%] text-brand-accent opacity-20 font-sans text-6xl" data-speed="-0.03">+</div>
+    </div>
+
+    <!-- Ticker Bar -->
+    <div class="border-b border-zinc-900 bg-black/60 backdrop-blur-md py-2 overflow-hidden sticky top-0 z-40">
+        <div class="flex whitespace-nowrap animate-ticker text-xs font-sans font-bold uppercase tracking-widest text-zinc-400 w-max">
+            <!-- Segment 1 -->
+            <span class="mx-6">★ TOMAS JARAMILLO — DIGITAL PLATFORM</span>
+            <span class="mx-6 text-brand-accent">MERCADÓLOGO CON ÉNFASIS EN PUBLICIDAD EAFIT 2027-1</span>
+            <span class="mx-6">★ GRAPHIC DESIGN & INTERACTION</span>
+            <span class="mx-6">2026 EDITION</span>
+            <!-- Segment 2 -->
+            <span class="mx-6">★ TOMAS JARAMILLO — DIGITAL PLATFORM</span>
+            <span class="mx-6 text-brand-accent">MERCADÓLOGO CON ÉNFASIS EN PUBLICIDAD EAFIT 2027-1</span>
+            <span class="mx-6">★ GRAPHIC DESIGN & INTERACTION</span>
+            <span class="mx-6">2026 EDITION</span>
+            <!-- Segment 3 -->
+            <span class="mx-6">★ TOMAS JARAMILLO — DIGITAL PLATFORM</span>
+            <span class="mx-6 text-brand-accent">MERCADÓLOGO CON ÉNFASIS EN PUBLICIDAD EAFIT 2027-1</span>
+            <span class="mx-6">★ GRAPHIC DESIGN & INTERACTION</span>
+            <span class="mx-6">2026 EDITION</span>
+            <!-- Segment 4 -->
+            <span class="mx-6">★ TOMAS JARAMILLO — DIGITAL PLATFORM</span>
+            <span class="mx-6 text-brand-accent">MERCADÓLOGO CON ÉNFASIS EN PUBLICIDAD EAFIT 2027-1</span>
+            <span class="mx-6">★ GRAPHIC DESIGN & INTERACTION</span>
+            <span class="mx-6">2026 EDITION</span>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="relative z-30 max-w-7xl mx-auto px-6 py-6 flex justify-between items-center border-b border-zinc-900/80">
+        <a href="#" class="font-display font-black text-2xl tracking-tighter hover:text-brand-accent transition-colors">TJ<span class="text-brand-accent">.</span></a>
+        
+        <nav class="hidden md:flex space-x-8 text-xs font-sans uppercase tracking-widest text-zinc-400 font-bold">
+            <a href="#hero" class="hover:text-white transition-colors magnetic-btn">Inicio</a>
+            <a href="#featured-projects" class="hover:text-white transition-colors magnetic-btn">Proyectos</a>
+            <a href="#services" class="hover:text-white transition-colors magnetic-btn">Servicios</a>
+            <a href="#about" class="hover:text-white transition-colors magnetic-btn">Sobre mí</a>
+        </nav>
+
+        <div class="flex items-center space-x-4">
+            <a href="resume_1.pdf" target="_blank" class="magnetic-btn relative px-6 py-2.5 rounded-full border border-zinc-700 text-xs font-sans uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-300">
+                Hoja de Vida
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-20 w-full">
+
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="min-h-[85vh] flex flex-col justify-center relative max-w-7xl mx-auto px-6 z-20">
+            <div class="max-w-5xl space-y-6 pt-12">
+                <div class="hero-reveal inline-block px-3 py-1 rounded-md bg-zinc-900/80 border border-brand-accent/30 text-xs font-sans uppercase tracking-widest font-bold text-brand-accent shadow-[0_0_15px_rgba(59,130,246,0.15)]">
+                    Behind every brand, there's a story worth telling.
+                </div>
+
+                <h1 class="hero-reveal font-display font-black text-6xl sm:text-8xl lg:text-9xl tracking-tighter leading-[0.85] text-white uppercase">
+                    TOMAS <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-zinc-600 pr-4">JARAMILLO</span>
+                </h1>
+
+                <p class="hero-reveal text-zinc-400 text-lg md:text-2xl max-w-2xl font-light leading-relaxed mt-8">
+                    Detrás de una identidad memorable hay un pensamiento estratégico riguroso. Combino investigación, creatividad y diseño para crear marcas que conectan con su audiencia y cumplen sus objetivos de negocio.
+                </p>
+
+                <div class="hero-reveal flex flex-wrap items-center gap-4 pt-12">
+                    <span class="text-zinc-500 font-sans text-sm tracking-widest uppercase animate-pulse">Desliza para explorar ↓</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. DRIVER SPECS & 3D CARD SECTION -->
+        <section id="driver-specs" class="relative min-h-[80vh] flex items-center py-24 z-20" style="overflow-x: clip;">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center w-full max-w-7xl mx-auto px-6">
+                
+                <div id="specs-left" class="lg:col-span-7 invisible flex flex-col justify-center h-[500px] relative group">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none z-10 opacity-80 transition-opacity duration-300 group-hover:opacity-0">
+                        <svg class="w-10 h-10 text-brand-accent mb-4 animate-float" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+                        </svg>
+                        <span class="font-sans text-sm text-brand-accent font-bold uppercase tracking-widest animate-pulse">¡Pasa el cursor por aquí!</span>
+                    </div>
+
+                    <div id="telemetry-scanner" class="absolute inset-0 w-full h-full cursor-crosshair z-20">
+                        <div class="scanner-mask absolute bg-brand-accent pointer-events-none opacity-0" style="left:-100vw; right:-100vw; top:-300px; bottom:-300px; -webkit-mask-image: radial-gradient(circle 0px at 50% 50%, black 0%, transparent 100%); mask-image: radial-gradient(circle 0px at 50% 50%, black 0%, transparent 100%);">
+                            <div class="absolute inset-0 bg-[radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                            <div class="absolute flex flex-col justify-center items-center" style="left:calc(100vw - 96px); right:calc(100vw - 96px); top:204px; bottom:204px;">
+                                <div class="relative z-10 w-full px-12 flex items-center justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="font-display font-black text-5xl md:text-7xl text-black leading-none uppercase tracking-tighter">See what</span>
+                                        <span class="font-display font-black text-5xl md:text-7xl text-transparent leading-none uppercase tracking-tighter" style="-webkit-text-stroke: 2px black;">others don't.</span>
+                                    </div>
+                                    <div class="hidden md:flex flex-col text-right font-sans text-xs text-black uppercase font-bold tracking-widest space-y-2 max-w-[200px]">
+                                        <span>Encontrar significado en los detalles.</span>
+                                    </div>
+                                </div>
+                                <div class="absolute right-24 top-1/2 -translate-y-1/2 w-48 h-48 border border-black/30 rounded-full animate-[spin_4s_linear_infinite] hidden md:block">
+                                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-black rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE: 3D Driver Card -->
+                <div class="lg:col-span-5 flex justify-center perspective-container pointer-events-auto">
+                    <div id="tilt-card" class="relative w-full max-w-md bg-brand-card border border-zinc-800/80 rounded-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-transform duration-200 ease-out preserve-3d invisible group">
+                        <div class="glare-overlay absolute inset-0 rounded-2xl pointer-events-none z-20"></div>
+                        <div class="flex justify-between items-center mb-6 border-b border-zinc-800/80 pb-4 relative z-10">
+                            <span class="text-xs font-sans font-bold text-zinc-500 uppercase">GRADUACIÓN</span>
+                            <span class="flex items-center text-xs font-sans font-bold text-brand-accent">
+                                <span class="w-2 h-2 rounded-full bg-brand-accent mr-2 animate-pulse shadow-[0_0_10px_#3b82f6]"></span> 2027-1
+                            </span>
+                        </div>
+                        
+                        <div class="relative h-72 rounded-xl overflow-hidden border border-zinc-800/60 z-10 bg-zinc-900">
+                            <img src="DSC01505.JPG" alt="Tomas Jaramillo" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent opacity-60 pointer-events-none"></div>
+                        </div>
+
+                        <div class="mt-6 space-y-2 relative z-10">
+                            <div class="flex justify-between text-xs font-sans">
+                                <span class="text-zinc-500 font-bold">CARRERA</span>
+                                <span class="text-zinc-200 font-bold">MERCADEO Y PUBLICIDAD</span>
+                            </div>
+                            <div class="flex justify-between text-xs font-sans">
+                                <span class="text-zinc-500 font-bold">UNIVERSIDAD</span>
+                                <span class="text-zinc-200 font-bold">UNIVERSIDAD EAFIT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SCROLL-DRIVEN MANIFESTO -->
+        <section class="py-32 border-t border-zinc-900 relative">
+            <div class="max-w-5xl mx-auto px-6 text-center">
+                <h2 id="manifesto-text" class="font-display font-bold text-3xl md:text-5xl lg:text-6xl leading-[1.2] tracking-tighter text-zinc-800 uppercase">
+                    “A brand is more than what people see. It’s what they remember, what they feel, and what they come back to.”
+                </h2>
+            </div>
+        </section>
+
+        <!-- 4. Projects Architecture -->
+        <div id="projects-wrapper" class="bg-brand-dark text-white overflow-hidden relative border-t border-zinc-900">
+
+            <!-- The Editorial Hero Reveal -->
+            <section class="relative min-h-[70vh] flex items-center justify-center px-6 pt-24 pb-16 z-20">
+                <div class="max-w-7xl w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative">
+                    <div class="md:col-span-8 z-10">
+                        <p class="font-sans font-bold text-brand-accent uppercase tracking-widest text-sm mb-4 split-text-target">01 // Archive</p>
+                        <h2 class="font-display font-black text-6xl md:text-8xl leading-[0.9] uppercase tracking-tighter">
+                            <div class="split-line"><span class="split-word">Resume</span></div>
+                            <div class="split-line"><span class="split-word text-brand-accent">Hoja de vida.</span></div>
+                        </h2>
+                    </div>
+
+                    <!-- Dynamic Resumes Stack (Exact UI Replication of Screenshot Layout) -->
+                    <div class="md:col-span-4 relative mt-12 md:mt-0 flex items-center justify-center h-[480px] md:h-[550px] group/stack perspective-container">
+                        
+                        <!-- Resume 2 (Back Card - PDF 02) -->
+                        <a href="resume_2.pdf" target="_blank" class="group absolute w-[75%] max-w-[320px] aspect-[1/1.414] bg-zinc-900 border border-zinc-700/80 rounded-3xl shadow-2xl transition-all duration-500 ease-out transform rotate-[8deg] translate-x-[25px] translate-y-[-15px] group-hover/stack:rotate-[14deg] group-hover/stack:translate-x-[65px] group-hover/stack:translate-y-[-25px] overflow-hidden z-10 hover:!z-30 hover:scale-105">
+                            <img src="preview_resume_2.jpg" alt="Resume 2" class="absolute inset-0 w-full h-full object-cover z-0">
+                            
+                            <!-- Dark Overlay UI -->
+                            <div class="absolute inset-0 bg-black/60 group-hover:bg-black/20 transition-all duration-500 z-10 p-5 flex flex-col justify-between">
+                                <div class="flex justify-between items-start group-hover:opacity-0 transition-opacity duration-300">
+                                    <span class="bg-blue-600 text-white text-[11px] font-sans font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
+                                        PDF 02
+                                    </span>
+                                    <span class="text-xs font-sans font-bold text-white uppercase tracking-widest pt-1">
+                                        HOJA DE VIDA
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <!-- Resume 1 (Front Card - CV 01) -->
+                        <a href="resume_1.pdf" target="_blank" class="group absolute w-[75%] max-w-[320px] aspect-[1/1.414] bg-zinc-900 border border-zinc-700/80 rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] transition-all duration-500 ease-out transform rotate-[-6deg] translate-x-[-15px] translate-y-[15px] group-hover/stack:rotate-[-12deg] group-hover/stack:translate-x-[-55px] group-hover/stack:translate-y-[25px] overflow-hidden z-20 hover:!z-30 hover:scale-105">
+                            <img src="preview_resume_1.jpg" alt="Resume 1" class="absolute inset-0 w-full h-full object-cover z-0">
+                            
+                            <!-- Dark Overlay UI matching Screenshot -->
+                            <div class="absolute inset-0 bg-black/60 group-hover:bg-black/20 transition-all duration-500 z-10 p-5 flex flex-col justify-between">
+                                
+                                <!-- Top Row: PDF 01 Pill -->
+                                <div class="flex justify-start">
+                                    <span class="bg-blue-600 text-white text-[11px] font-sans font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md group-hover:opacity-0 transition-opacity duration-300">
+                                        PDF 01
+                                    </span>
+                                </div>
+
+                                <!-- Center: Giant CV 01 Title -->
+                                <div class="text-center my-auto">
+                                    <h3 class="font-display font-black text-6xl text-white uppercase tracking-tighter drop-shadow-md group-hover:opacity-0 transition-opacity duration-300">
+                                        CV 01
+                                    </h3>
+                                </div>
+
+                                <!-- Bottom Row: VER VERSIÓN 1 Button + Blue Arrow -->
+                                <div class="flex items-center justify-between w-full group-hover:opacity-0 transition-opacity duration-300">
+                                    <span class="bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-sans font-bold uppercase tracking-widest px-4 py-2 rounded-full shadow-lg">
+                                        VER VERSIÓN 1
+                                    </span>
+
+                                    <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-lg">
+                                        ↗
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Horizontal Scroll Gallery -->
+            <section id="featured-projects" class="horizontal-trigger-section relative w-full h-screen bg-zinc-950 overflow-hidden border-t border-zinc-900">
+                <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #3b82f6 0, #3b82f6 1px, transparent 0, transparent 50%); background-size: 40px 40px;"></div>
+                
+                <div class="horizontal-pin-wrap h-full flex items-center">
+                    <div class="horizontal-track flex flex-nowrap gap-8 px-6 md:px-24 w-max">
+                        
+                        <!-- Intro Panel -->
+                        <div class="w-[70vw] md:w-[30vw] shrink-0 flex flex-col justify-center relative z-10">
+                            <p class="font-sans font-bold text-brand-accent uppercase tracking-widest text-sm mb-4">01 // Selected Work</p>
+                            <h3 class="font-display font-black text-5xl md:text-7xl text-white uppercase leading-none tracking-tighter">Featured <br><span class="text-brand-accent">Projects.</span></h3>
+                            <p class="font-sans text-zinc-400 mt-4 max-w-sm text-lg">Dirección de marketing, exploración visual y estrategia de marca.</p>
+                        </div>
+
+                        <!-- Card 1: Partners -->
+                        <div class="track-card relative w-[80vw] md:w-[40vw] h-[60vh] shrink-0 bg-zinc-900 clip-card-custom group border border-zinc-800">
+                            <a href="project_partners.html" class="absolute inset-0 bg-zinc-800 flex flex-col items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                                <span class="font-display font-black text-5xl text-zinc-700">PARTNERS</span>
+                            </a>
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none"></div>
+                            <div class="absolute bottom-8 left-8 pointer-events-none">
+                                <h4 class="font-display font-bold text-4xl text-white uppercase tracking-tighter">Partners</h4>
+                                <span class="font-sans font-bold text-brand-accent text-xs uppercase tracking-widest block mt-2">Board & Marketing Director</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Blueberry -->
+                        <div class="track-card relative w-[80vw] md:w-[40vw] h-[60vh] shrink-0 bg-zinc-900 clip-card-custom group border border-zinc-800">
+                            <a href="project_blueberry.html" class="absolute inset-0 bg-zinc-800 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                                <span class="font-display font-black text-6xl text-zinc-700">BLUEBERRY</span>
+                            </a>
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none"></div>
+                            <div class="absolute bottom-8 left-8 pointer-events-none">
+                                <h4 class="font-display font-bold text-4xl text-white uppercase tracking-tighter">Blueberry</h4>
+                                <span class="font-sans font-bold text-brand-accent text-xs uppercase tracking-widest block mt-2">Brand Identity & Brandbook</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Gimnasio VIVO -->
+                        <div class="track-card relative w-[80vw] md:w-[40vw] h-[60vh] shrink-0 bg-zinc-900 clip-card-custom group border border-zinc-800">
+                            <a href="project_gimnasio.html" class="absolute inset-0 bg-zinc-800 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                                <span class="font-display font-black text-5xl md:text-6xl text-zinc-700 uppercase text-center">GIMNASIO VIVO</span>
+                            </a>
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none"></div>
+                            <div class="absolute bottom-8 left-8 pointer-events-none">
+                                <h4 class="font-display font-bold text-4xl text-white uppercase tracking-tighter">Gimnasio VIVO</h4>
+                                <span class="font-sans font-bold text-brand-accent text-xs uppercase tracking-widest block mt-2">Market Research & Strategic Analysis</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Pisingaña -->
+                        <div class="track-card relative w-[80vw] md:w-[40vw] h-[60vh] shrink-0 bg-zinc-900 clip-card-custom group border border-zinc-800">
+                            <a href="project_pisingana.html" class="absolute inset-0 bg-zinc-800 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                                <span class="font-display font-black text-6xl text-zinc-700 uppercase">PISINGAÑA</span>
+                            </a>
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none"></div>
+                            <div class="absolute bottom-8 left-8 pointer-events-none">
+                                <h4 class="font-display font-bold text-4xl text-white uppercase tracking-tighter">Pisingaña</h4>
+                                <span class="font-sans font-bold text-brand-accent text-xs uppercase tracking-widest block mt-2">Brandbook Documentation</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- 5. SERVICES SECTION -->
+        <section id="services" class="relative py-32 bg-brand-dark overflow-hidden border-t border-zinc-900">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                
+                <div class="mb-16 md:mb-20">
+                    <span class="text-xs font-sans font-bold text-brand-accent uppercase tracking-widest flex items-center">
+                        <span class="w-8 h-[2px] bg-brand-accent mr-4"></span> 02 // Capabilities
+                    </span>
+                    <h2 class="font-display font-black text-5xl md:text-7xl text-white mt-6 uppercase tracking-tighter">
+                        Services & <br> <span class="text-brand-accent italic">Offerings.</span>
+                    </h2>
+                    <p class="font-sans text-zinc-400 mt-4 max-w-xl text-lg leading-relaxed">
+                        Construyendo identidades y estrategias que marcan la diferencia. Las ofertas definitivas de servicio se detallarán aquí pronto.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-8 border border-zinc-800 rounded-2xl bg-zinc-900/30 hover:bg-zinc-800/80 transition-colors duration-300 group">
+                        <div class="w-12 h-12 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center mb-6 group-hover:bg-brand-accent transition-colors">
+                            <span class="text-zinc-500 group-hover:text-white font-sans font-bold text-sm">01</span>
+                        </div>
+                        <h3 class="font-display font-bold text-2xl text-white uppercase tracking-tighter mb-4">Brand Strategy & Identity</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed font-sans">
+                            Ayudo a definir qué hace única a una marca, qué lugar quiere ocupar y cómo convertir esa esencia en una identidad coherente, reconocible y con personalidad.
+                            <span class="block mt-4 text-xs font-bold text-zinc-500 uppercase tracking-widest">Posicionamiento · Propuesta de valor · Personalidad de marca · Identidad visual · Logotipos · Manuales de marca</span>
+                        </p>
+                    </div>
+                    
+                    <div class="p-8 border border-zinc-800 rounded-2xl bg-zinc-900/30 hover:bg-zinc-800/80 transition-colors duration-300 group">
+                        <div class="w-12 h-12 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center mb-6 group-hover:bg-brand-accent transition-colors">
+                            <span class="text-zinc-500 group-hover:text-white font-sans font-bold text-sm">02</span>
+                        </div>
+                        <h3 class="font-display font-bold text-2xl text-white uppercase tracking-tighter mb-4">Creative Strategy & Communication</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed font-sans">
+                            Transformo estrategias e ideas en conceptos creativos y experiencias de comunicación que expresan la personalidad de una marca y conectan con las personas.
+                            <span class="block mt-4 text-xs font-bold text-zinc-500 uppercase tracking-widest">Conceptos creativos · Campañas · Storytelling · Dirección de arte · Copywriting · Contenido digital · Redes sociales</span>
+                        </p>
+                    </div>
+
+                    <div class="p-8 border border-zinc-800 rounded-2xl bg-zinc-900/30 hover:bg-zinc-800/80 transition-colors duration-300 group">
+                        <div class="w-12 h-12 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center mb-6 group-hover:bg-brand-accent transition-colors">
+                            <span class="text-zinc-500 group-hover:text-white font-sans font-bold text-sm">03</span>
+                        </div>
+                        <h3 class="font-display font-bold text-2xl text-white uppercase tracking-tighter mb-4">Market Research & Insights</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed font-sans">
+                            Exploro las necesidades de las personas, las tendencias y el entorno competitivo para descubrir oportunidades y convertir los hallazgos en decisiones estratégicas.
+                            <span class="block mt-4 text-xs font-bold text-zinc-500 uppercase tracking-widest">Investigación de mercados · Análisis de consumidores · Benchmarking · Insights · Análisis de tendencias</span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. SOBRE MÍ SECTION -->
+        <section id="about" class="relative py-32 bg-brand-dark overflow-hidden border-t border-zinc-900">
+            
+            <div class="absolute top-1/2 left-0 -translate-y-1/2 w-[200vw] -rotate-3 opacity-[0.03] pointer-events-none z-0">
+                <div class="flex whitespace-nowrap animate-ticker-fast font-display font-black text-[20vw] leading-none uppercase text-white w-max">
+                    <span class="mx-12">CREATIVE.</span>
+                    <span class="mx-12">STRATEGY.</span>
+                    <span class="mx-12">MOTION.</span>
+                    <span class="mx-12">IDENTITY.</span>
+                    <span class="mx-12">CREATIVE.</span>
+                    <span class="mx-12">STRATEGY.</span>
+                    <span class="mx-12">MOTION.</span>
+                    <span class="mx-12">IDENTITY.</span>
+                    <span class="mx-12">CREATIVE.</span>
+                    <span class="mx-12">STRATEGY.</span>
+                    <span class="mx-12">MOTION.</span>
+                    <span class="mx-12">IDENTITY.</span>
+                    <span class="mx-12">CREATIVE.</span>
+                    <span class="mx-12">STRATEGY.</span>
+                    <span class="mx-12">MOTION.</span>
+                    <span class="mx-12">IDENTITY.</span>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                
+                <div class="mb-16 md:mb-24">
+                    <span class="text-xs font-sans font-bold text-brand-accent uppercase tracking-widest flex items-center">
+                        <span class="w-8 h-[2px] bg-brand-accent mr-4"></span> 03 // Profile
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                    
+                    <div class="lg:col-span-7 space-y-8">
+                        <div class="text-xl md:text-3xl font-sans font-light text-zinc-300 leading-tight">
+                            Apasionado por el marketing y la publicidad, fusiono la creatividad con el pensamiento estratégico para desarrollar 
+                            <span class="text-white font-semibold hover:text-brand-accent hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.8)] transition-all duration-300 cursor-default">identidades de marca</span> 
+                            con personalidad y propósito. 
+                        </div>
+
+                        <p class="text-zinc-400 font-sans text-base md:text-lg leading-relaxed max-w-2xl">
+                            "Mi trabajo se define por la capacidad de traducir estrategias complejas en interfaces y productos digitales donde el diseño tiene un propósito claro. Combino el pensamiento analítico con el rigor del diseño, integrando nuevas tecnologías para optimizar cada proceso. Concibo el desarrollo de proyectos como un sistema integral donde la estética, la narrativa de marca y la experiencia del usuario operan con absoluta fluidez para generar resultados reales."
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-5 relative">
+                        <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl backdrop-blur-sm shadow-xl">
+                            <h3 class="font-sans font-bold text-xs text-zinc-500 uppercase tracking-widest mb-8 pb-4 border-b border-zinc-800">Skills // Tools // Languages</h3>
+                            
+                            <div class="space-y-8">
+                                
+                                <div>
+                                    <h4 class="font-display font-bold uppercase text-xs tracking-widest text-brand-accent mb-3">Software & Tools</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-3 py-1.5 text-xs font-sans font-bold border border-zinc-700 bg-zinc-800/50 rounded-md text-zinc-300 hover:text-white hover:border-brand-accent transition-colors">Adobe Photoshop</span>
+                                        <span class="px-3 py-1.5 text-xs font-sans font-bold border border-zinc-700 bg-zinc-800/50 rounded-md text-zinc-300 hover:text-white hover:border-brand-accent transition-colors">Adobe Illustrator</span>
+                                        <span class="px-3 py-1.5 text-xs font-sans font-bold border border-zinc-700 bg-zinc-800/50 rounded-md text-zinc-300 hover:text-white hover:border-brand-accent transition-colors">Adobe Premiere Pro</span>
+                                        <span class="px-3 py-1.5 text-xs font-sans font-bold border border-zinc-700 bg-zinc-800/50 rounded-md text-zinc-300 hover:text-white hover:border-brand-accent transition-colors">CapCut</span>
+                                        <span class="px-3 py-1.5 text-xs font-sans font-bold border border-zinc-700 bg-zinc-800/50 rounded-md text-zinc-300 hover:text-white hover:border-brand-accent transition-colors">Canva</span>
+                                        <span class="px-3 py-1.5 text-xs font-sans font-bold border border-brand-accent/30 bg-brand-accent/10 rounded-md text-brand-accent hover:bg-brand-accent hover:text-white transition-colors">AI Workflows</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-display font-bold uppercase text-xs tracking-widest text-brand-accent mb-3">Languages</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center text-sm font-sans font-bold pb-2 border-b border-zinc-800/50">
+                                            <span class="text-zinc-400">Spanish</span> 
+                                            <span class="text-white uppercase tracking-widest text-xs mt-1 sm:mt-0">Native</span>
+                                        </div>
+                                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center text-sm font-sans font-bold pb-2 border-b border-zinc-800/50">
+                                            <span class="text-zinc-400">English</span> 
+                                            <span class="text-brand-accent uppercase tracking-widest text-xs mt-1 sm:mt-0">Professional proficiency</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 7. CONTACT SECTION -->
+        <section id="contact" class="relative min-h-[70vh] bg-brand-dark flex flex-col items-center justify-center pt-32 pb-12 overflow-hidden border-t border-zinc-900 z-20">
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none z-0" style="background-image: linear-gradient(#f4f4f5 1px, transparent 1px), linear-gradient(90deg, #f4f4f5 1px, transparent 1px); background-size: 64px 64px;"></div>
+            
+            <div class="max-w-7xl mx-auto px-6 w-full relative z-10 flex flex-col items-center text-center">
+                
+                <p class="font-sans text-zinc-400 text-lg md:text-xl mb-4 font-light">¿Tu marca está lista para una idea loca?</p>
+                
+                <h2 id="hablemos-text" class="font-display font-black text-[18vw] leading-none text-white tracking-tighter cursor-pointer flex items-start justify-center group overflow-hidden py-4">
+                    <span class="h-letter inline-block">H</span>
+                    <span class="h-letter inline-block">A</span>
+                    <span class="h-letter inline-block">B</span>
+                    <span class="h-letter inline-block">L</span>
+                    <span class="h-letter inline-block">E</span>
+                    <span class="h-letter inline-block">M</span>
+                    <span class="h-letter inline-block">O</span>
+                    <span class="h-letter inline-block">S</span>
+                    <span class="h-star text-brand-accent origin-center inline-block ml-2 text-[14vw] leading-none mt-4">*</span>
+                </h2>
+
+                <div class="flex flex-wrap justify-center gap-12 md:gap-24 mt-8 md:mt-16 border-t border-zinc-800/50 pt-12 w-full max-w-4xl relative z-20">
+                    <a href="mailto:contact@tomasjaramillo.com" class="font-sans font-bold text-sm md:text-base uppercase tracking-widest text-zinc-400 hover:text-white transition-colors flex items-center group relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-brand-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                        Email <span class="ml-1 text-brand-accent group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform">↗</span>
+                    </a>
+                    <a href="https://wa.link/qe3w5g" target="_blank" class="font-sans font-bold text-sm md:text-base uppercase tracking-widest text-zinc-400 hover:text-white transition-colors flex items-center group relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-brand-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                        WhatsApp <span class="ml-1 text-brand-accent group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform">↗</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tomas-jaramillo-vega/" target="_blank" class="font-sans font-bold text-sm md:text-base uppercase tracking-widest text-zinc-400 hover:text-white transition-colors flex items-center group relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-brand-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                        LinkedIn <span class="ml-1 text-brand-accent group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform">↗</span>
+                    </a>
+                </div>
+
+                <div class="mt-24 flex justify-center items-center text-zinc-600 font-sans text-[10px] uppercase tracking-widest font-bold">
+                    <span>© 2026 TOMAS JARAMILLO. MARKETING PLATFORM.</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- GSAP Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
